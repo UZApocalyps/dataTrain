@@ -1,5 +1,5 @@
 require 'socket'
-
+require_relative 'api.rb'
 class HttpServer
 
   def initialize(ip,port)
@@ -21,7 +21,7 @@ class HttpServer
     
       case path
       when "/trains"
-        response_body = ""
+        response_body = Api.get("","")
       when "/schedules"
         response_body = ""
       else
@@ -29,12 +29,11 @@ class HttpServer
       end
     
     
-      session.puts <<-HEREDOC
-    HTTP/1.1 #{status}
-    
-    #{response_body}
-      HEREDOC
-    
+      session.print "HTTP/1.1 #{status}\r\n" # 1
+      session.print "Content-Type: text/html\r\n" # 2
+      session.print "\r\n" # 3
+      session.print "#{response_body}" #4
+      
       session.close
     end
   end

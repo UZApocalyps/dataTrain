@@ -9,6 +9,6 @@ class Api
 
         end
         res = Net::HTTP.get_response(uri)
-        return res
+        return res.body
     end
 end

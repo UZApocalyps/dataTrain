@@ -1,7 +1,7 @@
 require 'uri'
 require 'net/http'
 class Api
-    def self.get(url,parameters)
+    def self.get(url,parameters = nil)
         uri = URI(url)
         params = parameters
         if parameters != nil

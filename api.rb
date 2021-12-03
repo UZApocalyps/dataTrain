@@ -4,7 +4,10 @@ class Api
     def self.get(url,parameters)
         uri = URI(url)
         params = parameters
-        uri.query = URI.encode_www_form(params)
+        if parameters != nil
+            uri.query = URI.encode_www_form(params)
+
+        end
         res = Net::HTTP.get_response(uri)
         return res
     end

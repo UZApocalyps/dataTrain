@@ -24,17 +24,17 @@ class HttpServer
       path = path.split('?')[0]
       case path
       when "/lines"
-        response_body = ch.lines
+        response_body = instance_variable_get("@#{parameters["country"].downcase}").lines
       when "/trains"
-        response_body = ch.trains
+        response_body = instance_variable_get("@#{parameters["country"].downcase}").trains
       when "/schedules"
         response_body = instance_variable_get("@#{parameters["country"].downcase}").schedules
       when "/events"
-        response_body = ch.events
+        response_body = instance_variable_get("@#{parameters["country"].downcase}").events
       when "/trainsonlines"
-        response_body = ch.trainsonlines
+        response_body = instance_variable_get("@#{parameters["country"].downcase}").trainsonlines
       when "/structure"
-        response_body = ch.strucutre
+        response_body = instance_variable_get("@#{parameters["country"].downcase}").strucutre
       else
         status = 404
       end

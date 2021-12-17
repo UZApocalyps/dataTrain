@@ -19,45 +19,54 @@ class HttpServer
         request << line.chomp
       end
     
-      http_method, path, protocol = request[0].split(' ') # Get path 
-      parameters = extract_parameter(path)
-      path = path.split('?')[0]
-      case path
-      when "/lines"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").lines
-      when "/trains"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").trains
-      when "/schedules"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").schedules
-      when "/events"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").events
-      when "/trainsonlines"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").trainsonlines
-      when "/structure"
-        response_body = instance_variable_get("@#{parameters["country"].downcase}").strucutre
-      else
-        status = 404
-      end
-    
-    
-      session.print "HTTP/1.1 #{status}\r\n" # 1
-      session.print "Content-Type: text/html\r\n" # 2
-      session.print "\r\n" # 3
-      session.print "#{response_body}" #4
+      if request[0] != nil
+        http_method, path, protocol = request[0].split(' ') # Get path 
+        parameters = extract_parameter(path)
+        path = path.split('?')[0]
+        if parameters == nil
+          status = 400
+        else
+          case path
+          when "/lines"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").lines
+          when "/trains"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").trains
+          when "/schedules"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").schedules
+          when "/events"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").events
+          when "/trainsonlines"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").trainsonlines
+          when "/structure"
+            response_body = instance_variable_get("@#{parameters["country"].downcase}").strucutre
+          else
+            status = 404
+          end
+        end
       
-      session.close
+      
+        session.print "HTTP/1.1 #{status}\r\n" # 1
+        session.print "Content-Type: text/html\r\n" # 2
+        session.print "\r\n" # 3
+        session.print "#{response_body}" #4
+        
+        session.close
+      end
     end
   end
+
 
   def extract_parameter(url)
     if url.include? '?'
       parameter_string = url.split('?')[1]
-      parameters = parameter_string.split('&')
-      array_parameters = {}
-      for value in parameters do
-        array_parameters[value.split('=')[0]] = value.split('=')[1]
+      if parameter_string != nil
+        parameters = parameter_string.split('&')
+        array_parameters = {}
+        for value in parameters do
+          array_parameters[value.split('=')[0]] = value.split('=')[1]
+        end
+        return array_parameters
       end
-      return array_parameters
     end
     return nil
   end

@@ -6,7 +6,7 @@ class HttpServer
     @server = TCPServer.new port
     @status = 200
     @host = ip
-  end
+  end 
 
   def start_http_server
     @ch = CH.new

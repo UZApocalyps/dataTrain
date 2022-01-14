@@ -24,7 +24,7 @@ class HttpServer
         parameters = extract_parameter(path)
         path = path.split('?')[0]
         if parameters == nil
-          status = 400
+          @status = 400
         else
           case path
           when "/lines"
@@ -40,12 +40,12 @@ class HttpServer
           when "/structure"
             response_body = instance_variable_get("@#{parameters["country"].downcase}").strucutre
           else
-            status = 404
+            @status = 404
           end
         end
       
       
-        session.print "HTTP/1.1 #{status}\r\n" # 1
+        session.print "HTTP/1.1 " + @status.to_s + "\r\n" # 1
         session.print "Content-Type: text/html\r\n" # 2
         session.print "\r\n" # 3
         session.print "#{response_body}" #4

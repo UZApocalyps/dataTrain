@@ -1,24 +1,14 @@
 # README
+dataTrain is an API that has the objective to collect and send datas from train companies. Right now it's focused on the CFF network.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirement
+Ruby 3
 
-Things you may want to cover:
+## dataTrain API
+[Swagger Api](https://app.swaggerhub.com/apis/gabrielrossier/DataTrain/0.0.1#/default/get_trains)
 
-* Ruby version
+## Unit testing
 
-* System dependencies
+## Sources
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Switzerland : [CFF API](https://data.sbb.ch/api/) 

@@ -1,11 +1,10 @@
-#!/bin/bash
-set -e
+
 
 echo "Deployment started ..."
 
 # Pull the latest version of the app
-git pull origin develop
+git pull
 
-sudo systemctl start datatrain.service
+sudo systemctl restart datatrain.service
 
 echo "Deployment finished!"

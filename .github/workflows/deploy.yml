@@ -24,4 +24,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           port: ${{ secrets.DEPLOY_PORT }}
           key: ${{ secrets.DEPLOY_KEY }}
-          script: "cd /home/admin/dataTrain && source /var/www/trainwarehouse/.scripts/deploy.sh"
+          script: "cd /home/admin/dataTrain && ./.scripts/deploy.sh"

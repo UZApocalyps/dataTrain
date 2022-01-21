@@ -1,0 +1,27 @@
+name: Deploy
+
+# Trigger the workflow on push and 
+# pull request events on the production branch
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+      
+# Authenticate to the the server via ssh 
+# and run our deployment script 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: "cd /home/admin/dataTrain && ./.scripts/deploy.sh"

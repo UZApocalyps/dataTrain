@@ -4,6 +4,10 @@ dataTrain is an API that has the objective to collect and send datas from train 
 ## Requirement
 Ruby 3
 
+## Installation
+ - Clone project
+ - Start project using command **ruby data_train.rb**
+
 ## dataTrain API
 [Swagger Api](https://app.swaggerhub.com/apis/gabrielrossier/DataTrain/0.0.1#/default/get_trains)
 
